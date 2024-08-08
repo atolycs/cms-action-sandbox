@@ -5,7 +5,7 @@ on:
         branches:
             - blog/*
         paths:
-            - 'content/blog/*.md'
+            - '**/content/blog/*.md'
     workflow_dispatch:
 
 jobs:
