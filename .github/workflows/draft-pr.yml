@@ -1,0 +1,30 @@
+name: Article Draft PR
+
+on:
+    push:
+        branches:
+            - blog/*
+    workflow_dispatch:
+
+jobs:
+    create_pr:
+        name: Create Draft PR
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Create Github Apps Token
+              uses: actions/create-github-app-token@v1
+              id: gh_token
+              with:
+                app_id: ${{ secrets.APP_ID }}
+                private_key: ${{ secrets.PRIVATE_KEY }}
+
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Create PR
+              run: |
+                    gh pr create --base main --head $GITHUB_REF --title "Draft PR for $GITHUB_REF" --body "This is a draft PR for $GITHUB_REF"
+              env:
+                  GITHUB_TOKEN: ${{ steps.gh_token.outputs.github_token }}
+                  GITHUB_REF: ${{ github.ref }}
