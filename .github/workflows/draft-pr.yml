@@ -33,7 +33,7 @@ jobs:
                   GITHUB_REF: ${{ github.ref }}
             
             - name: Create PR
-              if: steps.check_pr.outputs.stdout == ''
+              if: steps.check_pr.outputs.outcome == 'success'
               run: |
                     gh pr create --base main --head $GITHUB_REF --title "Draft PR for $GITHUB_REF" --body "This is a draft PR for $GITHUB_REF"
               env:
