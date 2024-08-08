@@ -26,5 +26,5 @@ jobs:
               run: |
                     gh pr create --base main --head $GITHUB_REF --title "Draft PR for $GITHUB_REF" --body "This is a draft PR for $GITHUB_REF"
               env:
-                  GITHUB_TOKEN: ${{ steps.gh_token.outputs.github_token }}
+                  GH_TOKEN: ${{ steps.gh_token.outputs.github_token }}
                   GITHUB_REF: ${{ github.ref }}
