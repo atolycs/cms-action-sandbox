@@ -33,7 +33,7 @@ jobs:
                   
                   const pulls = await github.rest.pulls.list({
                     ...context.repo,
-                    head: context.ref
+                    head: context.ref,
                     base: 'main',
                     state: 'open'
                   })
