@@ -35,7 +35,7 @@ jobs:
                   const pulls = await github.rest.pulls.list({
                     owner: owner,
                     repo: repo,
-                    head: context.ref,
+                    head: '${{ github.ref_name }}',
                     base: 'main',
                     state: 'open'
                   })
@@ -46,7 +46,7 @@ jobs:
                       title: '[CI] Draft Article Works',
                       owner: owner,
                       repo: repo,
-                      head: context.ref,
+                      head: '${{ github.ref_name }}',
                       base: 'main',
                       body: [
                         'This is a draft PR for ${{ github.ref_name }}',
