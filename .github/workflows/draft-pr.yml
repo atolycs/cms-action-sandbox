@@ -30,17 +30,22 @@ jobs:
                 github-token: ${{ steps.gh_token.outputs.token }}
                 script: |
                   const sha = context.payload.pull_request?.head.sha ?? context.sha;
+                  const { repo, owner } = context.repo
                   
                   const pulls = await github.rest.pulls.list({
-                    ...context.repo,
+                    owner: owner,
+                    repo: repo,
                     head: context.ref,
                     base: 'main',
                     state: 'open'
                   })
+                  console.log(pulls)
                   
                   if (pulls.data.length < 1) {
                     await github.rest.pulls.create({
-                      ...context.repo,
+                      title: '[CI] Draft Article Works',
+                      owner: owner,
+                      repo: repo,
                       head: context.ref,
                       base: 'main',
                       body: [
