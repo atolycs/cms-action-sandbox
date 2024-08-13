@@ -49,19 +49,19 @@ jobs:
                       ].join('\n')
                     })
                   }
-
-            - name: Check already existing PR
-              id: check_pr
-              run: |
-                    gh pr list --state open --base main --head $GITHUB_REF
-              env:
-                  GH_TOKEN: ${{ steps.gh_token.outputs.token }}
-                  GITHUB_REF: ${{ github.ref }}
-            
-            - name: Create PR
-              if: steps.check_pr.outputs.stdout == ''
-              run: |
-                    gh pr create --base main --head $GITHUB_REF --title "Draft PR for $GITHUB_REF" --body "This is a draft PR for $GITHUB_REF"
-              env:
-                  GH_TOKEN: ${{ steps.gh_token.outputs.token }}
-                  GITHUB_REF: ${{ github.ref }}
+            #
+            # - name: Check already existing PR
+            #   id: check_pr
+            #   run: |
+            #         gh pr list --state open --base main --head $GITHUB_REF
+            #   env:
+            #       GH_TOKEN: ${{ steps.gh_token.outputs.token }}
+            #       GITHUB_REF: ${{ github.ref }}
+            #
+            # - name: Create PR
+            #   if: steps.check_pr.outputs.stdout == ''
+            #   run: |
+            #         gh pr create --base main --head $GITHUB_REF --title "Draft PR for $GITHUB_REF" --body "This is a draft PR for $GITHUB_REF"
+            #   env:
+            #       GH_TOKEN: ${{ steps.gh_token.outputs.token }}
+            #       GITHUB_REF: ${{ github.ref }}
